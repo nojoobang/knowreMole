@@ -187,7 +187,7 @@ _._unBindEvent = function() {
 };
 
 _._explosion = function(e) {
-	$('.moleField').trigger('explosion', [Math.floor($('.moleField').offset().left - e.clientX), Math.floor($('.moleField').offset().top - e.clientY)]);
+	$('.moleField').trigger('explosion', [Math.floor(e.clientX - $('.moleField').offset().left), Math.floor(e.clientY - $('.moleField').offset().top)]);
 };
 
 _._moleCrash = function(target) {
