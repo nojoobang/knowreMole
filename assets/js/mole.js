@@ -44,7 +44,7 @@ _._startGame = function(members) {
 	function intervalRandom(){
 		setTimeout(function(){
 			var moleIndex = Math.floor(Math.random() * that.moles.length);
-			if(Math.random() > 0.7){
+			if(Math.random() > 0.3){
 				that.moles[moleIndex].domObj.trigger('show');
 
 				var moleIndex2 = Math.floor(Math.random() * that.moles.length);
