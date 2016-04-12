@@ -5,6 +5,7 @@ var MoleGame = function() {
 	this.moles = [];
 
 	this._initialize();
+	
 };
 
 var _ = MoleGame.prototype;
@@ -154,7 +155,7 @@ _._bindEvent = function() {
 var Mole = function(memberData) {
 	this.domObj = null;
 	this.memberData = memberData;
-
+	this.sound = new Sound();
 	this._initialize();
 };
 
@@ -218,4 +219,6 @@ _._moleCrash = function(target) {
 
 	$('.comboField').find('.combo').trigger('add');
 	$('.comboField').find('.keyword').trigger('add', [keyword]);
+
+	that.sound.random();
 };

@@ -38,6 +38,10 @@ _._initialize = function() {
     sounds.forEach(function(v){
         createjs.Sound.registerSound(audioPath+v.src, v.id);    
     })
+
+    that.randomIds = sounds.map(function(v){
+                    return v.id;
+                })
     
     function handleLoad(event) {
         that.playMap[event.id] = true;
@@ -51,6 +55,13 @@ _.play = function(id){
     console.log('play '+id);
     if(this.playMap[id])   createjs.Sound.play(id);
     else console.log(id + ' is not loaded!!');
+}
+
+_.random = function(){
+    var that = this,
+        id = that.randomIds[Math.floor(Math.random()*100) % that.randomIds.length];
+    
+    that.play(id);
 }
 
 
