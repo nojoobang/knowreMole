@@ -230,6 +230,7 @@ _._setTimer = function() {
 
 	this.eventTimer = setTimeout(function() {
 		$('.comboField').find('.combo').trigger('add', [true]);
+		$('.comboField').find('.keyword').trigger('add', [" "]);
 		that._unBindEvent();
 	}, 1900);
 };
