@@ -104,3 +104,12 @@ body {
 	width: 50%;
 	height: 100%;
 }
+
+@font-face {
+	font-family: 'oldgame';
+	src: url('../font/OldGameFatty.ttf');
+}
+
+.combo {
+	font-family: 'oldgame';
+}
