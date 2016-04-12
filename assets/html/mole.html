@@ -20,7 +20,14 @@
 	</div>
 </body>
 <script type="text/javascript">
-    test_sound();
+    var a = new Sound();
+
+    a.play('UpperCut');
+    setTimeout(function(){
+        a.play('UpperCut');
+        a.play('BatmanPunch');
+    },1000)
+    
 </script>
 </html>
 	
