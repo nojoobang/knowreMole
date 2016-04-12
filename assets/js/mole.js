@@ -149,6 +149,7 @@ _._bindEvent = function() {
 			that.sound.playType('miss');
 		} else {
 			that.combo++;
+			if(that.combo % 5 === 0) that.sound.playType('combo');
 		}
 		$(this).html(that.combo + ' COMBO!');
 	});	
