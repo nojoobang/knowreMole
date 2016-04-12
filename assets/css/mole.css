@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'oldgame';
+	src: url('../font/OldGameFatty.ttf');
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -39,6 +44,8 @@ body {
 	justify-content: center;
 
 	font-size: 30px;
+	font-family: 'oldgame';
+	color: red;
 }
 
 #GameScreen .comboField .keyword {
@@ -53,8 +60,25 @@ body {
 }
 
 #GameScreen .moleField {
+	position: relative;
+
 	width: 100%;
 	height: 50%;
+}
+
+#GameScreen .moleField .explosion {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 80px;
+	height: 80px;
+
+	background-image: url('../images/explosion.png');
+
+	display: none;
+
+	z-index: 100;
 }
 
 #GameScreen .moleField .mole {
@@ -103,13 +127,4 @@ body {
 
 	width: 50%;
 	height: 100%;
-}
-
-@font-face {
-	font-family: 'oldgame';
-	src: url('../font/OldGameFatty.ttf');
-}
-
-.combo {
-	font-family: 'oldgame';
 }

@@ -32,6 +32,7 @@ _._createMole = function() {
 	}
 
 	this._startGame(members);
+	this._bindEvent();
 };
 
 _._startGame = function(members) {
@@ -40,9 +41,24 @@ _._startGame = function(members) {
 		len = members.length;
 
 	setInterval(function() {
-		that.moles[Math.floor(Math.random() * that.moles.length)].domObj.trigger('show');
+		// that.moles[Math.floor(Math.random() * that.moles.length)].domObj.trigger('show');
+		that.moles[0].domObj.trigger('show');
 	}, 2000);
 };
+
+_._bindEvent = function() {
+	var that = this;
+
+	$('.moleField').bind('explosion', function(e, offsetX, offsetY) {
+		$(this).find('.explosion').show().css({
+			top: offsetY - 40,
+			left: offsetX - 40
+		});
+		setTimeout(function() {
+			$('.explosion').hide();
+		}, 100);
+	});
+};	
 
 var Combo = function() {
 	this.domObj = $('.comboField');
@@ -116,7 +132,6 @@ _._bindShowEvnet = function() {
 		e.stopPropagation();
 
 		$('.comboField').find('.combo').trigger('add', [true]);
-		console.log('field');
 		//that.sound.playType('combo');		
 	});
 };
@@ -160,7 +175,8 @@ _._bindEvent = function() {
 
 	this.domObj.find('.pic').bind('click', function(e) {
 		e.stopPropagation();
-
+		console.log(e);
+		that._explosion(e);
 		that._moleCrash($(this));
 		that._hide();
 	});
@@ -168,6 +184,10 @@ _._bindEvent = function() {
 
 _._unBindEvent = function() {
 	this.domObj.find('.pic').unbind('click');
+};
+
+_._explosion = function(e) {
+	$('.moleField').trigger('explosion', [Math.floor($('.moleField').offset().left - e.clientX), Math.floor($('.moleField').offset().top - e.clientY)]);
 };
 
 _._moleCrash = function(target) {
