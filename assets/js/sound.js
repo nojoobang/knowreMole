@@ -1,14 +1,7 @@
 'use strict';
-var _sound = null;
 
 var Sound = function() {
-    if(!_sound){
-        _sound = _._initialize();
-        console.log('_sound singleton !');
-        
-    } else {
-        console.log('_sound singleton exist!!');
-    }
+    _._initialize();
 };
 
 _ = Sound.prototype;
