@@ -5,6 +5,7 @@ var MoleGame = function() {
 	this.moles = [];
 
 	this._initialize();
+	
 };
 
 var _ = MoleGame.prototype;
@@ -120,8 +121,7 @@ _._startGame = function(members) {
 		len = members.length;
 
 	setInterval(function() {
-		// that.moles[Math.floor(Math.random() * that.moles.length)].domObj.trigger('show');
-		that.moles[0].domObj.trigger('show');
+		that.moles[Math.floor(Math.random() * that.moles.length)].domObj.trigger('show');
 	}, 2000);
 };
 
@@ -129,6 +129,7 @@ var Combo = function() {
 	this.domObj = $('.comboField');
 
 	this.combo = 0;
+	this.sound = new Sound();
 
 	this._initialize();
 };
@@ -145,10 +146,10 @@ _._bindEvent = function() {
 	this.domObj.find('.combo').bind('add', function(e, resetFlag) {
 		if(resetFlag) {
 			that.combo = 0;
+			that.sound.playType('miss');
 		} else {
 			that.combo++;
 		}
-		
 		$(this).html(that.combo + ' COMBO!');
 	});	
 
@@ -160,8 +161,10 @@ _._bindEvent = function() {
 var Mole = function(memberData) {
 	this.domObj = null;
 	this.memberData = memberData;
+	this.sound = new Sound();
 	this.domTimer = null;
 	this.eventTimer = null;
+	this.isClicked = false;
 
 	this._initialize();
 };
@@ -179,6 +182,12 @@ _._arrange = function() {
 
 	$('.moleField').append(this.domObj);
 
+	this._bindShowEvnet();
+};
+
+_._bindShowEvnet = function() {
+	var that = this;
+
 	this.domObj.bind('show', function() {
 		that._show();
 	});
@@ -187,17 +196,24 @@ _._arrange = function() {
 		e.stopPropagation();
 
 		$('.comboField').find('.combo').trigger('add', [true]);
+		console.log('field');
+		//that.sound.playType('combo');		
 	});
 };
 
 _._show = function() {
 	this.domObj.find('.pic').addClass('cur');
 	this._setTimer();
+	this.sound.playType('mole');
 };
 
 _._hide = function() {
 	clearTimeout(this.domTimer);
 	clearTimeout(this.eventTimer);
+
+	if(!this.isClicked) {
+		$('.comboField').find('.combo').trigger('add', [true]);
+	}
 
 	this.domObj.find('.pic').removeClass('cur');
 	this._unBindEvent();
@@ -213,8 +229,9 @@ _._setTimer = function() {
 	}, 1800);
 
 	this.eventTimer = setTimeout(function() {
+		$('.comboField').find('.combo').trigger('add', [true]);
 		that._unBindEvent();
-	}, 2000);
+	}, 1900);
 };
 
 _._bindEvent = function() {
@@ -243,4 +260,7 @@ _._moleCrash = function(target) {
 
 	$('.comboField').find('.combo').trigger('add', [false]);
 	$('.comboField').find('.keyword').trigger('add', [keyword]);
+
+	this.isClicked = true;
+	this.sound.playType('hit');
 };
