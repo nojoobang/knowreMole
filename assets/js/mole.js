@@ -40,10 +40,31 @@ _._startGame = function(members) {
 		members = this.members,
 		len = members.length;
 
-	setInterval(function() {
-		// that.moles[Math.floor(Math.random() * that.moles.length)].domObj.trigger('show');
-		that.moles[0].domObj.trigger('show');
-	}, 2000);
+	var intervalRandomArray = [1000,1500,2000,2500,3000];
+	function intervalRandom(){
+		setTimeout(function(){
+			var moleIndex = Math.floor(Math.random() * that.moles.length);
+			if(Math.random() > 0.7){
+				that.moles[moleIndex].domObj.trigger('show');
+
+				var moleIndex2 = Math.floor(Math.random() * that.moles.length);
+				if(moleIndex2 === moleIndex) {
+					if( moleIndex === 0)
+						moleIndex2 = that.moles.length -1;
+					else if( moleIndex === that.moles.length -1)
+						moleIndex2 = 0;
+				}
+
+				that.moles[moleIndex2].domObj.trigger('show');
+			} else {
+				that.moles[moleIndex].domObj.trigger('show');
+			}
+			
+			intervalRandom();
+		},intervalRandomArray[Math.floor(Math.random()*10)%5])
+	}
+
+	intervalRandom();
 };
 
 _._bindEvent = function() {
