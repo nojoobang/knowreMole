@@ -1,12 +1,15 @@
 'use strict';
 
 var Sound = function() {
-    _._initialize();
+    this.playMap = {};
+    this._initialize();
 };
 
-_ = Sound.prototype;
+var _ = Sound.prototype;
 
 _._initialize = function() {
+    var that = this;
+
     if (!createjs.Sound.initializeDefaultPlugins()) {return;}
  
     var audioPath = "../sound/";
@@ -37,7 +40,7 @@ _._initialize = function() {
     })
     
     function handleLoad(event) {
-        _.playMap[event.id] = true;
+        that.playMap[event.id] = true;
     }
 
     console.log('_initialize')
@@ -46,11 +49,11 @@ _._initialize = function() {
 
 _.play = function(id){
     console.log('play '+id);
-    if(_.playMap[id])   createjs.Sound.play(id);
+    if(this.playMap[id])   createjs.Sound.play(id);
     else console.log(id + ' is not loaded!!');
 }
 
-_.playMap = {};
+
 
 
 
