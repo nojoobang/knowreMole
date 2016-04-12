@@ -130,7 +130,6 @@ var Combo = function() {
 
 	this.combo = 0;
 	this.sound = new Sound();
-	this.resetTimer = null;
 
 	this._initialize();
 };
@@ -139,7 +138,6 @@ var _ = Combo.prototype;
 
 _._initialize = function() {
 	this._bindEvent();
-	this._setComboTimer();
 };
 
 _._bindEvent = function() {
@@ -152,7 +150,6 @@ _._bindEvent = function() {
 		} else {
 			that.combo++;
 		}
-		that._resetComboTimer();
 		$(this).html(that.combo + ' COMBO!');
 	});	
 
@@ -161,31 +158,13 @@ _._bindEvent = function() {
 	});	
 };
 
-_._setComboTimer = function() {
-	var that = this;
-
-	this.resetTimer = setTimeout(function() {
-		that.domObj.find('.combo').trigger('add', [true]);
-	}, 5000);
-};
-
-_._resetComboTimer = function() {
-	var that = this;
-
-	clearTimeout(this.resetTimer);
-
-	this.resetTimer = setTimeout(function() {
-		that.domObj.find('.combo').trigger('add', [true]);
-	}, 4000);
-};
-
-
 var Mole = function(memberData) {
 	this.domObj = null;
 	this.memberData = memberData;
 	this.sound = new Sound();
 	this.domTimer = null;
 	this.eventTimer = null;
+	this.isClicked = false;
 
 	this._initialize();
 };
@@ -232,6 +211,10 @@ _._hide = function() {
 	clearTimeout(this.domTimer);
 	clearTimeout(this.eventTimer);
 
+	if(!this.isClicked) {
+		$('.comboField').find('.combo').trigger('add', [true]);
+	}
+
 	this.domObj.find('.pic').removeClass('cur');
 	this._unBindEvent();
 }
@@ -246,6 +229,7 @@ _._setTimer = function() {
 	}, 1800);
 
 	this.eventTimer = setTimeout(function() {
+		$('.comboField').find('.combo').trigger('add', [true]);
 		that._unBindEvent();
 	}, 1900);
 };
@@ -277,5 +261,6 @@ _._moleCrash = function(target) {
 	$('.comboField').find('.combo').trigger('add', [false]);
 	$('.comboField').find('.keyword').trigger('add', [keyword]);
 
-	that.sound.playType('hit');
+	this.isClicked = true;
+	this.sound.playType('hit');
 };
