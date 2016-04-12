@@ -120,7 +120,8 @@ _._startGame = function(members) {
 		len = members.length;
 
 	setInterval(function() {
-		that.moles[Math.floor(Math.random() * that.moles.length)].domObj.trigger('show');
+		// that.moles[Math.floor(Math.random() * that.moles.length)].domObj.trigger('show');
+		that.moles[0].domObj.trigger('show');
 	}, 2000);
 };
 
@@ -141,8 +142,13 @@ _._initialize = function() {
 _._bindEvent = function() {
 	var that = this;
 
-	this.domObj.find('.combo').bind('add', function() {
-		that.combo++;
+	this.domObj.find('.combo').bind('add', function(e, resetFlag) {
+		if(resetFlag) {
+			that.combo = 0;
+		} else {
+			that.combo++;
+		}
+		
 		$(this).html(that.combo + ' COMBO!');
 	});	
 
@@ -154,6 +160,8 @@ _._bindEvent = function() {
 var Mole = function(memberData) {
 	this.domObj = null;
 	this.memberData = memberData;
+	this.domTimer = null;
+	this.eventTimer = null;
 
 	this._initialize();
 };
@@ -174,11 +182,25 @@ _._arrange = function() {
 	this.domObj.bind('show', function() {
 		that._show();
 	});
+
+	this.domObj.bind('click', function(e) {
+		e.stopPropagation();
+
+		$('.comboField').find('.combo').trigger('add', [true]);
+	});
 };
 
 _._show = function() {
 	this.domObj.find('.pic').addClass('cur');
 	this._setTimer();
+};
+
+_._hide = function() {
+	clearTimeout(this.domTimer);
+	clearTimeout(this.eventTimer);
+
+	this.domObj.find('.pic').removeClass('cur');
+	this._unBindEvent();
 }
 
 _._setTimer = function() {
@@ -186,20 +208,23 @@ _._setTimer = function() {
 
 	this._bindEvent();
 
-	setTimeout(function() {
+	this.domTimer = setTimeout(function() {
 		that.domObj.find('.pic').removeClass('cur');
-	}, 1500);
+	}, 1800);
 
-	setTimeout(function() {
+	this.eventTimer = setTimeout(function() {
 		that._unBindEvent();
 	}, 2000);
-}
+};
 
 _._bindEvent = function() {
 	var that = this;
 
-	this.domObj.find('.pic').bind('click', function() {
+	this.domObj.find('.pic').bind('click', function(e) {
+		e.stopPropagation();
+
 		that._moleCrash($(this));
+		that._hide();
 	});
 };
 
@@ -216,6 +241,6 @@ _._moleCrash = function(target) {
 		target.css('cursor', "url('../images/Cultures-Thor-Hammer-icon.png'), auto");
 	}, 100);
 
-	$('.comboField').find('.combo').trigger('add');
+	$('.comboField').find('.combo').trigger('add', [false]);
 	$('.comboField').find('.keyword').trigger('add', [keyword]);
 };
