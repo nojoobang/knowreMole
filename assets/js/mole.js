@@ -41,8 +41,8 @@ _._startGame = function(members) {
 		len = members.length;
 
 	setInterval(function() {
-		// that.moles[Math.floor(Math.random() * that.moles.length)].domObj.trigger('show');
-		that.moles[0].domObj.trigger('show');
+		that.moles[Math.floor(Math.random() * that.moles.length)].domObj.trigger('show');
+		// that.moles[0].domObj.trigger('show');
 	}, 2000);
 };
 
