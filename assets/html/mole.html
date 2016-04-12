@@ -6,6 +6,8 @@
 	<script type="text/javascript" src="http://oreesh-js.s3.amazonaws.com.edgesuite.net/school/development/jquery/jquery-2.1.0.min.js"></script>
 	<script id="OreeshScript" type="text/javascript" src="http://oreesh-js.s3.amazonaws.com.edgesuite.net/school/development/oreesh.min.js"></script>
 	<script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
+    <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+    <script src="../js/sound.js"></script>
 	<title>KnowreMole</title>
 </head>
 <body>
@@ -17,5 +19,15 @@
 		<section id="DescScreen"></section>
 	</div>
 </body>
+<script type="text/javascript">
+    var a = new Sound();
+
+    a.play('UpperCut');
+    setTimeout(function(){
+        a.play('UpperCut');
+        a.play('BatmanPunch');
+    },1000)
+    
+</script>
 </html>
 	
