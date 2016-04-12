@@ -22,6 +22,15 @@ _._initialize = function() {
         {id:"StrongPunch", src:"Strong_Punch-Mike_Koenig-574430706.mp3"},
         {id:"TempleBell", src:"TempleBellHuge-SoundBible.com-695883450.mp3"},
         {id:"UpperCut", src:"UpperCut-SoundBible.com-1272257235.mp3"},
+        {id:"Blip_Select", src:"Blip_Select.wav"},
+        {id:"Blip_Select2", src:"Blip_Select2.wav"},
+        {id:"Default", src:"Default.wav"},
+        {id:"Hit_Hurt", src:"Hit_Hurt.wav"},
+        {id:"Jump", src:"Jump.wav"},
+        {id:"Laser_Shoot", src:"Laser_Shoot.wav"},
+        {id:"Laser_Shoot2", src:"Laser_Shoot2.wav"},
+        {id:"Pickup_Coin", src:"Pickup_Coin.wav"},
+        {id:"Powerup", src:"Powerup.wav"},
     ];
  
     createjs.Sound.alternateExtensions = ["mp3"];
