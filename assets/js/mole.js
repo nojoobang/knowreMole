@@ -65,6 +65,7 @@ _._startGame = function(members) {
 	}
 
 	intervalRandom();
+
 };
 
 _._bindEvent = function() {
