@@ -103,7 +103,7 @@ _._createMole = function(members) {
 		i;
 
 	for(i = 0; i < len; i++) {
-		// this.moles.push(new Mole(members[i]));
+		this.moles.push(new Mole(members[i]));
 	}
 };
 
@@ -124,7 +124,7 @@ _._initialize = function() {
 var Mole = function(memberData) {
 	this.memberData = memberData;
 
-	// this._initialize();
+	this._initialize();
 };
 
 var _ = Mole.prototype;

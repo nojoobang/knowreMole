@@ -1,16 +1,8 @@
 'use strict';
-var _sound = null;
 
 var Sound = function() {
     this.playMap = {};
-
-    if(!_sound){
-        _sound = _._initialize();
-        console.log('_sound singleton !');
-        
-    } else {
-        console.log('_sound singleton exist!!');
-    }
+    this._initialize();
 };
 
 var _ = Sound.prototype;
@@ -39,7 +31,6 @@ _._initialize = function() {
     })
     
     function handleLoad(event) {
-        console.log(event);
         that.playMap[event.id] = true;
     }
 
