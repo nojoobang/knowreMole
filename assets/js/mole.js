@@ -139,7 +139,10 @@ _._initialize = function() {
 };
 
 _._bindEvent = function() {
+	var that = this;
+
 	this.domObj.find('.combo').bind('add', function() {
+		that.combo++;
 		$(this).html(that.combo + ' COMBO!');
 	});	
 
@@ -150,7 +153,6 @@ _._bindEvent = function() {
 
 var Mole = function(memberData) {
 	this.domObj = null;
-	this.keyword = '';
 	this.memberData = memberData;
 
 	this._initialize();
@@ -214,6 +216,6 @@ _._moleCrash = function(target) {
 		target.css('cursor', "url('../images/Cultures-Thor-Hammer-icon.png'), auto");
 	}, 100);
 
-	$('.comboField').find('combo').trigger('add');
-	$('.comboField').find('keyword').trigger('add', [keyword]);
+	$('.comboField').find('.combo').trigger('add');
+	$('.comboField').find('.keyword').trigger('add', [keyword]);
 };
