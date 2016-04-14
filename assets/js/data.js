@@ -57,7 +57,7 @@ var jsonData =
 		},
 		{
 			name: "Marian",
-			keyword: ["젊은이 or Germany", "아~ 애기 돌보기 힘들다", "한국말 잘 해요", "하키를 좋아해요", "멜리사"],
+			keyword: ["젊은이 or Germany", "아~ 애기 돌보기 힘들다", "한국말 잘 해요", "하키를 좋아해요", "멜리사","I like dancing"],
 			desc: 'test'
 		},
 		{
